@@ -16,17 +16,10 @@ jobs:
     environment: staging
     steps:
       - uses: actions/checkout@v4
-
       - name: Deploy to Staging
-        run: |
-          echo "Deploying to staging..."
-          echo "Commit ${{ github.sha }}"
-
+        run: echo "Deploying to staging"
       - name: Job Summary
-        run: |
-          echo "## Staging Deployment" >> $GITHUB_STEP_SUMMARY
-          echo "Commit ${{ github.sha }} deployed" >> $GITHUB_STEP_SUMMARY
-
+        run: echo "Staging deployed" >> $GITHUB_STEP_SUMMARY
       - name: Notify
         run: echo "Slack notification staging successful"
 
@@ -36,11 +29,7 @@ jobs:
     environment: production
     steps:
       - uses: actions/checkout@v4
-
       - name: Deploy to Production
-        run: |
-          echo "Deploying to production..."
-          echo "Commit ${{ github.sha }}"
-
+        run: echo "Deploying to production"
       - name: Notify
         run: echo "Slack notification production successful"
