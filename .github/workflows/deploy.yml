@@ -26,10 +26,9 @@ jobs:
       - name: Job Summary
         run: |
           echo "## Staging Deployment Summary" >> $GITHUB_STEP_SUMMARY
-          echo "- **Status:** Success" >> $GITHUB_STEP_SUMMARY
-          echo "- **Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Time:** $(date)" >> $GITHUB_STEP_SUMMARY
-          echo "- **Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Status: Success" >> $GITHUB_STEP_SUMMARY
+          echo "- Commit: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Branch: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
       - name: Notify Staging
         run: echo "Slack notification: Deployment to staging successful"
 
@@ -48,11 +47,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ github.run_number }}.0.0
-          release_name: Release v${{ github.run_number }}.0.0
-          body: |
-            Automated release from CI/CD pipeline
-            Commit: ${{ github.sha }}
+          tag_name: v2026.${{ github.run_number }}
+          release_name: Release v2026.${{ github.run_number }}
+          body: Automated release. Commit ${{ github.sha }}
           draft: false
           prerelease: false
       - name: Notify Production
