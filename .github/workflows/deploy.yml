@@ -6,8 +6,6 @@ on:
     paths:
       - 'app.py'
       - 'config.py'
-      - 'templates/**'
-      - 'static/**'
       - 'Dockerfile'
       - 'requirements.txt'
       - 'docker-compose.yml'
@@ -18,18 +16,18 @@ jobs:
     environment: staging
     steps:
       - uses: actions/checkout@v4
+
       - name: Deploy to Staging
         run: |
-          echo "Deploying to staging environment..."
-          echo "Image: sakila-app:${{ github.sha }}"
-          echo "Branch: ${{ github.ref_name }}"
+          echo "Deploying to staging..."
+          echo "Commit: ${{ github.sha }}"
+
       - name: Job Summary
         run: |
-          echo "## Staging Deployment Summary" >> $GITHUB_STEP_SUMMARY
-          echo "- Status: Success" >> $GITHUB_STEP_SUMMARY
-          echo "- Commit: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Branch: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
-      - name: Notify Staging
+          echo "## Staging Deployment" >> $GITHUB_STEP_SUMMARY
+          echo "Commit ${{ github.sha }} deployed" >> $GITHUB_STEP_SUMMARY
+
+      - name: Notify
         run: echo "Slack notification: Deployment to staging successful"
 
   deploy-production:
@@ -38,19 +36,11 @@ jobs:
     environment: production
     steps:
       - uses: actions/checkout@v4
+
       - name: Deploy to Production
         run: |
-          echo "Deploying to production environment..."
-          echo "Image: sakila-app:${{ github.sha }}"
-      - name: Create GitHub Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v2026.${{ github.run_number }}
-          release_name: Release v2026.${{ github.run_number }}
-          body: Automated release. Commit ${{ github.sha }}
-          draft: false
-          prerelease: false
-      - name: Notify Production
+          echo "Deploying to production..."
+          echo "Commit: ${{ github.sha }}"
+
+      - name: Notify
         run: echo "Slack notification: Deployment to production successful"
