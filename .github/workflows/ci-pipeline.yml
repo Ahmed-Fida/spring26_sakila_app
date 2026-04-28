@@ -1,0 +1,3 @@
+git add .github/workflows/ci-pipeline.yml
+git commit -m "feat(ci): add multi-stage CI pipeline with lint, test, build and security scan"
+git push origin main
