@@ -4,11 +4,11 @@ on:
   push:
     branches: [main]
     paths:
-      - 'app.py'
-      - 'config.py'
-      - 'Dockerfile'
-      - 'requirements.txt'
-      - 'docker-compose.yml'
+      - "app.py"
+      - "config.py"
+      - "Dockerfile"
+      - "requirements.txt"
+      - "docker-compose.yml"
 
 jobs:
   deploy-staging:
@@ -20,7 +20,7 @@ jobs:
       - name: Deploy to Staging
         run: |
           echo "Deploying to staging..."
-          echo "Commit: ${{ github.sha }}"
+          echo "Commit ${{ github.sha }}"
 
       - name: Job Summary
         run: |
@@ -28,7 +28,7 @@ jobs:
           echo "Commit ${{ github.sha }} deployed" >> $GITHUB_STEP_SUMMARY
 
       - name: Notify
-        run: echo "Slack notification: Deployment to staging successful"
+        run: echo "Slack notification staging successful"
 
   deploy-production:
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
       - name: Deploy to Production
         run: |
           echo "Deploying to production..."
-          echo "Commit: ${{ github.sha }}"
+          echo "Commit ${{ github.sha }}"
 
       - name: Notify
-        run: echo "Slack notification: Deployment to production successful"
+        run: echo "Slack notification production successful"
