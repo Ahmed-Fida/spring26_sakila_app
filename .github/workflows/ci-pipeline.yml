@@ -73,8 +73,9 @@ jobs:
           MYSQL_PASSWORD: admin
           MYSQL_DB: sakila
           SECRET_KEY: testsecretkey123
-          PYTHONPATH: ${{ github.workspace }}/spring26_sakila_app
-        run: pytest tests/ -v
+        run: |
+          cd ${{ github.workspace }}
+          PYTHONPATH=${{ github.workspace }} pytest tests/ -v
 
   build:
     runs-on: ubuntu-latest
